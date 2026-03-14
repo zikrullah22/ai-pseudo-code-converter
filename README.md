@@ -1,56 +1,155 @@
-# 🤖 AI Pseudo Code Converter
+# Pseudo Converter
 
-![GitHub](https://img.shields.io/github/license/zikrullah22/ai-pseudo-code-converter)
-![GitHub last commit](https://img.shields.io/github/last-commit/zikrullah22/ai-pseudo-code-converter)
-![GitHub repo size](https://img.shields.io/github/repo-size/zikrullah22/ai-pseudo-code-converter)
+Pseudo Converter is a web app that translates pseudo code into real code using the Groq API and the `llama-3.3-70b-versatile` model.
 
-An intelligent web application that converts plain English/pseudo code into real programming languages using Groq's Llama 3.3 AI model. Perfect for computing students learning algorithms and data structures!
+The project includes:
+- A Node.js + Express backend API
+- A modern single-page frontend in `public/index.html`
+- Real-time syntax-highlighted output with Prism.js
+- Responsive UI for desktop, tablet, and phone screens
 
-🔗 **Live Demo:** [Coming Soon - Deploy on Netlify/Render]
+## Features
 
-📂 **GitHub Repository:** [https://github.com/zikrullah22/ai-pseudo-code-converter](https://github.com/zikrullah22/ai-pseudo-code-converter)
+- Convert pseudo code to:
+	- Python
+	- Java
+	- C++
+	- JavaScript
+	- Rust
+- Copy generated code to clipboard
+- Download generated code as a file with correct extension
+- Example/template quick insert tools
+- API health check endpoint
+- Mobile-friendly responsive layout and controls
 
----
+## Tech Stack
 
-## ✨ Features
+- Backend: Node.js, Express, Groq SDK
+- Frontend: HTML, CSS, Vanilla JavaScript
+- Syntax Highlighting: Prism.js
 
-- ✅ **5 Programming Languages Supported**
-  - Python 🐍
-  - Java ☕
-  - C++ ⚙️
-  - JavaScript 🌐
-  - Rust 🦀
+## Project Structure
 
-- ✅ **Beautiful Syntax Highlighting** with Prism.js
-- ✅ **Real-time Conversion** using Groq Llama 3.3 70B
-- ✅ **One-click Copy** to clipboard
-- ✅ **Download Code** as file with proper extensions
-- ✅ **Character Counters** for input/output
-- ✅ **Keyboard Shortcut**: `Ctrl+Enter` to convert
-- ✅ **Example Templates** included
-- ✅ **Responsive Design** - works on mobile/tablet/desktop
-- ✅ **Toast Notifications** for all actions
-- ✅ **Dark Theme** with glass morphism UI
+```text
+pseudo-converter/
+|- public/
+|  |- index.html
+|- server.js
+|- package.json
+|- README.md
+```
 
----
+## Prerequisites
 
-## 🖼️ Screenshots
+- Node.js 18+ (recommended)
+- A valid Groq API key
 
-| Input Pseudo Code | Generated Output |
-|-------------------|------------------|
-| ![Input](https://via.placeholder.com/400x300?text=Input+Pseudo+Code) | ![Output](https://via.placeholder.com/400x300?text=Generated+Code) |
+## Setup
 
----
+1. Install dependencies:
 
-## 🚀 Quick Start
+```bash
+npm install
+```
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [Groq API Key](https://console.groq.com) (free)
+2. Create a `.env` file in the project root:
 
-### Installation
+```env
+GROQ_API_KEY=your_groq_api_key_here
+PORT=3000
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/zikrullah22/ai-pseudo-code-converter.git
-   cd ai-pseudo-code-converter
+`PORT` is optional. Default is `3000`.
+
+## Run
+
+Start production mode:
+
+```bash
+npm start
+```
+
+Start development mode (with auto-restart):
+
+```bash
+npm run dev
+```
+
+Open in browser:
+
+```text
+http://localhost:3000
+```
+
+## API Endpoints
+
+### `POST /api/translate`
+
+Request body:
+
+```json
+{
+	"pseudo": "if x > 10 then print x",
+	"language": "python"
+}
+```
+
+Success response:
+
+```json
+{
+	"success": true,
+	"code": "if x > 10:\n    print(x)"
+}
+```
+
+Error response (example):
+
+```json
+{
+	"success": false,
+	"error": "Missing pseudo code or language"
+}
+```
+
+### `GET /api/health`
+
+Response:
+
+```json
+{
+	"status": "running",
+	"model": "llama-3.3-70b-versatile",
+	"timestamp": "2026-03-14T00:00:00.000Z"
+}
+```
+
+## Notes
+
+- Conversion quality depends on pseudo-code clarity.
+- If you see API errors, verify `GROQ_API_KEY` in `.env`.
+- If the frontend cannot connect, confirm the server is running on the same port.
+
+## UI Preview
+
+Add screenshots to `docs/screenshots/` and keep these file names:
+
+- `desktop.png`
+- `tablet.png`
+- `mobile.png`
+
+```md
+![Desktop UI](docs/screenshots/desktop.png)
+![Tablet UI](docs/screenshots/tablet.png)
+![Mobile UI](docs/screenshots/mobile.png)
+```
+
+Suggested captions:
+
+- Desktop: Full split-pane workflow with syntax-highlighted output.
+- Tablet: Stacked panes with touch-friendly controls.
+- Mobile: Compact layout with responsive buttons and scrollable language selector.
+
+## License
+
+This project is licensed under the terms of the `LICENSE` file in this repository.
